@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo OSI</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <img src="./imagem/modelo-osi.png" alt="Modelo OSI" class="header-photo">
+        
+        <div class="header-info">
+            <p class="title">Projeto de Redes - Modelo OSI</p>
+            <div class="user-box">
+                <p class="user"></p>
+                <button id="btn-logout" class="logout-btn">Trocar Usuário</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-body">
+
+        <div class="request-wrapper">
+            <input type="text" placeholder="Digite algo aqui (ex: ws://chat, www.site.com ou @email)..." class="text-input input-field">
+            <button type="submit" class="request-btn">Verificar Protocolo</button>
+
+            <div class="upload-section">
+                <label for="arquivo">Selecione um arquivo para envio:</label>
+                <input type="file" id="arquivo">
+            </div>
+        </div>
+
+        <div class="protocol-response-wrapper">
+            <h1 class="protocol-response"></h1>
+        </div>
+
+        <form class="email-form hidden">
+            <h2 class="form-title">Simulador de Envio (SMTP)</h2>
+            
+            <div class="form-group">
+                <label for="remetente">Remetente:</label>
+                <input type="email" id="remetente" class="input-field" placeholder="exemplo@email.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="destinatario">Destinatário:</label>
+                <input type="email" id="destinatario" class="input-field" placeholder="destino@email.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="assunto">Assunto:</label>
+                <input type="text" id="assunto" class="input-field" placeholder="Assunto do e-mail" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="corpo">Corpo da Mensagem:</label>
+                <textarea id="corpo" class="input-field textarea-field" placeholder="Digite sua mensagem..." required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="protocolo">Protocolo:</label>
+                <input type="text" id="protocolo" class="input-field" value="SMTP" readonly>
+            </div>
+            
+            <button type="submit" class="request-btn">Enviar E-mail</button>
+        </form>
+
+        <form class="chat-form hidden">
+            <h2 class="form-title">Simulador de Chat (WebSocket)</h2>
+            
+            <div class="form-group">
+                <label for="chat-destinatario">Enviar para (Destinatário):</label>
+                <input type="text" id="chat-destinatario" class="input-field" placeholder="Nome do amigo ou grupo..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="chat-mensagem">Mensagem do Chat:</label>
+                <textarea id="chat-mensagem" class="input-field textarea-field" placeholder="Digite a mensagem do chat..." required></textarea>
+            </div>
+            
+            <button type="submit" class="request-btn">Enviar Mensagem</button>
+        </form>
+
+        <form class="site-form hidden">
+            <h2 class="form-title">Simulador de Requisição Web (HTTP/HTTPS)</h2>
+            
+            <div class="form-group">
+                <label for="site-metodo">Método HTTP:</label>
+                <select id="site-metodo" class="input-field">
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="PUT">PUT</option>
+                    <option value="DELETE">DELETE</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="site-host">Host / IP Detectado:</label>
+                <input type="text" id="site-host" class="input-field" readonly>
+            </div>
+            
+            <button type="submit" class="request-btn">Enviar Requisição HTTP</button>
+        </form>
+
+    </main>
+
+    <script type="module" src="scripts/apresentacao.js"></script>
+    <script type="module" src="scripts/application.js"></script>
+</body>
+</html>
