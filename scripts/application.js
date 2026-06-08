@@ -1,3 +1,7 @@
+import {
+    camadaApresentacao
+} from "./apresentacao.js";
+
 // --- Identificação do Usuário & Logout ---
 let USER_NAME = localStorage.getItem("nome-usuario");
 
@@ -84,7 +88,9 @@ btnEnviar.addEventListener("click", (event) => {
 
 // --- Envio: E-mail (SMTP) ---
 if (emailForm) {
-    emailForm.addEventListener("submit", (event) => {
+    emailForm.addEventListener(
+    "submit",
+    async (event) => {
         event.preventDefault();
 
         const dadosEmail = {
@@ -98,7 +104,7 @@ if (emailForm) {
         };
 
         console.log("Camada de Aplicação → E-mail:", dadosEmail);
-        camadaApresentacao(dadosEmail);
+        await camadaApresentacao(dadosEmail);
         emailForm.reset();
         limparFormularios();
     });
@@ -106,7 +112,9 @@ if (emailForm) {
 
 // --- Envio: Chat (WebSocket) ---
 if (chatForm) {
-    chatForm.addEventListener("submit", (event) => {
+    chatForm.addEventListener(
+    "submit",
+    async (event) => {
         event.preventDefault();
 
         const dadosChat = {
@@ -119,7 +127,7 @@ if (chatForm) {
         };
 
         console.log("Camada de Aplicação → Chat:", dadosChat);
-        camadaApresentacao(dadosChat);
+        await camadaApresentacao(dadosChat);
         chatForm.reset();
         limparFormularios();
     });
@@ -127,7 +135,9 @@ if (chatForm) {
 
 // --- Envio: Arquivos (FTP/HTTP) ---
 if (inputFile) {
-    inputFile.addEventListener("change", () => {
+    inputFile.addEventListener(
+    "change",
+    async () => {
         if (inputFile.files.length > 0) {
             const file = inputFile.files[0];
             const partesNome = file.name.split(".");
@@ -144,14 +154,16 @@ if (inputFile) {
 
             console.log("Camada de Aplicação → Arquivo:", dadosArquivo);
             alert(`Arquivo "${file.name}" carregado na camada de aplicação! Transmitindo...`);
-            camadaApresentacao(dadosArquivo);
+            await camadaApresentacao(dadosArquivo);
         }
     });
 }
 
 // --- Envio: Requisição Web (HTTP/HTTPS) ---
 if (siteForm) {
-    siteForm.addEventListener("submit", (event) => {
+    siteForm.addEventListener(
+    "submit",
+    async (event) => {
         event.preventDefault();
 
         const dadosSite = {
@@ -164,7 +176,7 @@ if (siteForm) {
         };
 
         console.log("Camada de Aplicação → Site:", dadosSite);
-        camadaApresentacao(dadosSite);
+        await camadaApresentacao(dadosSite);
         siteForm.reset();
         limparFormularios();
     });
