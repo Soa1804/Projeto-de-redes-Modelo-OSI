@@ -216,8 +216,9 @@ body {
 }
 
 .resultado-container {
+
     width: 100%;
-    max-width: 900px;
+    max-width: 1200px;
 
     background: rgba(255,255,255,.10);
 
@@ -226,9 +227,6 @@ body {
     padding: 2rem;
 
     text-align: center;
-
-    box-shadow:
-        0 8px 20px rgba(0,0,0,.2);
 }
 
 .resultado-container h1 {
@@ -277,4 +275,37 @@ body {
     .input-field {
         width: 100%;
     }
+}
+
+/* --- Canvas --- */
+.network-container {
+    margin-top: 2rem;
+}
+
+#networkCanvas {
+
+    width: 100%;
+    max-width: 1000px;
+
+    background: rgba(255,255,255,.05);
+
+    border: 2px solid rgba(255,255,255,.2);
+
+    border-radius: 12px;
+
+    margin-bottom: 2rem;
+}
+
+/* --- Rotas --- */
+.rota-info {
+
+    text-align: left;
+
+    background: rgba(255,255,255,.08);
+
+    padding: 1rem;
+
+    border-radius: 10px;
+
+    margin: 1rem 0;
 }

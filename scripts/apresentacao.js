@@ -3,6 +3,22 @@ import {
     decodeJwt
 } from "https://cdn.jsdelivr.net/npm/jose@6/+esm";
 
+import {
+    camadaSessao
+} from "./sessao.js";
+
+import {
+    camadaTransporte
+} from "./transporte.js";
+
+import {
+    camadaEnlace
+} from "./enlace.js";
+
+import {
+    camadaFisica
+} from "./fisica.js";
+
 const SECRET =
     new TextEncoder().encode(
         "chave-teste"
@@ -19,7 +35,6 @@ async function gerarTokenJWT(dados) {
             new Date().toISOString(),
 
         dados
-
     };
 
     const token =
@@ -34,10 +49,18 @@ async function gerarTokenJWT(dados) {
 
 export async function camadaApresentacao(dadosLimpos) {
 
+    // =====================
+    // CAMADA DE APRESENTAÇÃO
+    // =====================
+
     const token =
         await gerarTokenJWT(
             dadosLimpos
         );
+
+    console.log(
+        "CAMADA DE APRESENTAÇÃO"
+    );
 
     console.log(
         "JWT Gerado:",
@@ -52,13 +75,68 @@ export async function camadaApresentacao(dadosLimpos) {
         payload
     );
 
+    // =====================
+    // CAMADA DE SESSÃO
+    // =====================
+
+    const sessao =
+        camadaSessao(
+            payload
+        );
+
+    // =====================
+    // CAMADA DE TRANSPORTE
+    // =====================
+
+    const segmentos =
+        camadaTransporte(
+            sessao
+        );
+
+    // =====================
+    // CAMADA DE ENLACE
+    // =====================
+
+    const quadros =
+        camadaEnlace(
+            segmentos
+        );
+
+    // =====================
+    // CAMADA FÍSICA
+    // =====================
+
+    const bits =
+        camadaFisica(
+            quadros
+        );
+
+    // =====================
+    // ARMAZENAR RESULTADO
+    // =====================
+
     localStorage.setItem(
         "dadosCriptografados",
         JSON.stringify({
+
             token,
-            payload
+
+            payload,
+
+            sessao,
+
+            segmentos,
+
+            quadros,
+
+            bits
+
         })
     );
+
+    // =====================
+    // PRÓXIMA TELA
+    // =====================
 
     window.location.href =
         "resultado.html";
