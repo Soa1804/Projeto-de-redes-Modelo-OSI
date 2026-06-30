@@ -54,62 +54,43 @@ export async function camadaApresentacao(dadosLimpos) {
     // =====================
 
     const token =
-        await gerarTokenJWT(
-            dadosLimpos
-        );
+        await gerarTokenJWT(dadosLimpos);
 
-    console.log(
-        "CAMADA DE APRESENTAÇÃO"
-    );
-
-    console.log(
-        "JWT Gerado:",
-        token
-    );
+    console.log("CAMADA DE APRESENTAÇÃO");
+    console.log("JWT Gerado:", token);
 
     const payload =
         decodeJwt(token);
 
-    console.log(
-        "Payload:",
-        payload
-    );
+    console.log("Payload:", payload);
 
     // =====================
     // CAMADA DE SESSÃO
     // =====================
 
     const sessao =
-        camadaSessao(
-            payload
-        );
+        camadaSessao(payload);
 
     // =====================
     // CAMADA DE TRANSPORTE
     // =====================
 
     const segmentos =
-        camadaTransporte(
-            sessao
-        );
+        camadaTransporte(sessao);
 
     // =====================
     // CAMADA DE ENLACE
     // =====================
 
     const quadros =
-        camadaEnlace(
-            segmentos
-        );
+        camadaEnlace(segmentos);
 
     // =====================
-    // CAMADA FÍSICA
+    // CAMADA DE FÍSICA
     // =====================
 
-    const bits =
-        camadaFisica(
-            quadros
-        );
+    const fisica =
+        camadaFisica(quadros);
 
     // =====================
     // ARMAZENAR RESULTADO
@@ -118,19 +99,14 @@ export async function camadaApresentacao(dadosLimpos) {
     localStorage.setItem(
         "dadosCriptografados",
         JSON.stringify({
-
             token,
-
             payload,
-
             sessao,
-
             segmentos,
-
             quadros,
-
-            bits
-
+            bits: fisica.bits,
+            quadrosFisicos: fisica.quadros,
+            statusFisica: fisica.status
         })
     );
 
@@ -138,6 +114,5 @@ export async function camadaApresentacao(dadosLimpos) {
     // PRÓXIMA TELA
     // =====================
 
-    window.location.href =
-        "resultado.html";
+    window.location.href = "resultado.html";
 }

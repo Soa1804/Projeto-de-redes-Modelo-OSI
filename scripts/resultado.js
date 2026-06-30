@@ -248,4 +248,57 @@ else {
             );
         }
     }
+
+    function formatarPacotes(bits) {
+
+        if (!bits) return "";
+
+        const limpo = bits.replace(/\s+/g, "");
+
+        const tamanhoPacote = 8;
+
+        const pacotes = [];
+
+        for (let i = 0; i < limpo.length; i += tamanhoPacote) {
+
+            const bloco = limpo.slice(i, i + tamanhoPacote);
+
+            pacotes.push(`[${bloco}]`);
+        }
+
+        return pacotes.join(" ");
+    }
+
+    // =====================
+    // DADOS DO LOCALSTORAGE (UMA SÓ VEZ)
+    // =====================
+    const dados = resultado;
+
+    // =====================
+    // QUADROS
+    // =====================
+    const quadrosDiv = document.createElement("div");
+
+    quadrosDiv.innerHTML = `
+        <h3>Quadros da Camada de Enlace/Física</h3>
+        <div class="quadros-box">
+            ${JSON.stringify(dados.quadros, null, 2)}
+        </div>
+    `;
+
+    containerDados.appendChild(quadrosDiv);
+
+    // =====================
+    // BITS
+    // =====================
+    const bitsDiv = document.createElement("div");
+
+    bitsDiv.innerHTML = `
+        <h3>Camada Física (Binário)</h3>
+        <div class="bits-box">
+            ${formatarPacotes(dados.bits)}
+        </div>
+    `;
+
+    containerDados.appendChild(bitsDiv);
 }
